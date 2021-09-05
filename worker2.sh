@@ -65,7 +65,7 @@ sudo systemctl start crio
 sudo systemctl enable crio
 
 ##Configure Kubelet
-cat > /etc/sysconfig/kubelet <<EOF
+cat > /etc/default/kubelet <<EOF
 KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"
 EOF
 systemctl restart kubelet
