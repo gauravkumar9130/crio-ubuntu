@@ -3,9 +3,13 @@
 ##Setup Hostname
 hostnamectl set-hostname worker1
 
-### setup terminal
+### Prerequisites
 apt-get update
-apt-get install vim curl net-tools -y
+apt-get install vim curl net-tools openssh-server -y
+systemctl start ssh
+systemctl enable ssh
+ufw allow ssh
+
 
 
 ##Configure Kubernetes Repository
