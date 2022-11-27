@@ -41,7 +41,7 @@ sudo sysctl --system
 
 ##Install Container Runtime CRIO
 OS=xUbuntu_22.04
-VERSION=1.21
+VERSION=1.25
 
 echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
 echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.list
@@ -56,14 +56,9 @@ sudo systemctl daemon-reload
 sudo systemctl start crio
 sudo systemctl enable crio
 
-##Configure Kubelet
-cat > /etc/default/kubelet <<EOF
-KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"
-EOF
-
 ##Initialize Kubernetes
 systemctl restart kubelet
-kubeadm init --pod-network-cidr=10.244.0.0/16
+kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket unix:///var/run/crio/crio.sock
 mkdir -p /root/.kube
 cp /etc/kubernetes/admin.conf /root/.kube/config
 wget -O /root/calico.yaml https://docs.projectcalico.org/manifests/calico.yaml
