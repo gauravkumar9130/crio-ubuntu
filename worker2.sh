@@ -1,6 +1,6 @@
 #!/bin/sh
 
-##setup hostname
+##Setup Hostname
 hostnamectl set-hostname worker2
 
 ### setup terminal
@@ -41,7 +41,7 @@ sudo sysctl --system
 
 ##Install Container Runtime CRIO
 OS=xUbuntu_22.04
-VERSION=1.21
+VERSION=1.25
 
 echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
 echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.list
@@ -55,9 +55,5 @@ apt-get install cri-o cri-o-runc -y
 sudo systemctl daemon-reload
 sudo systemctl start crio
 sudo systemctl enable crio
-
-##Configure Kubelet
-cat > /etc/default/kubelet <<EOF
-KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"
-EOF
-systemctl restart kubelet
+sudo systemctl start kubelet
+sudo systemctl enable kubelet
