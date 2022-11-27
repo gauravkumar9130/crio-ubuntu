@@ -55,9 +55,10 @@ apt-get install cri-o cri-o-runc -y
 sudo systemctl daemon-reload
 sudo systemctl start crio
 sudo systemctl enable crio
+sudo systemctl start kubelet
+sudo systemctl enable kubelet
 
 ##Initialize Kubernetes
-systemctl restart kubelet
 kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket unix:///var/run/crio/crio.sock
 mkdir -p /root/.kube
 cp /etc/kubernetes/admin.conf /root/.kube/config
