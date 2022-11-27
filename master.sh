@@ -48,7 +48,7 @@ EOF
 sudo sysctl --system
 
 ##Install Container Runtime CRIO
-OS=xUbuntu_20.04
+OS=xUbuntu_22.04
 VERSION=1.21
 
 echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
