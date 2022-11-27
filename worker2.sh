@@ -5,7 +5,7 @@ hostnamectl set-hostname worker2
 
 ### setup terminal
 apt-get update
-apt-get install -y bash-completion binutils
+apt-get install vim curl net-tools -y
 
 
 ##Configure Kubernetes Repository
